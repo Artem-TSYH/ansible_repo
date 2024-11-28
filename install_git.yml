@@ -1,0 +1,12 @@
+- name: Installation Git
+  hosts: my_vm
+  become: yes
+  tasks:
+    - name: Überprüfung. Neue Packete
+      apt:
+        update_cache: yes
+
+    - name: Wir installieren Git
+      apt:
+        name: git
+        state: present
