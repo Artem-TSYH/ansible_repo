@@ -1,0 +1,9 @@
+- name: Meine erste Schritte mit Ansible
+  hosts: my_vm
+  become: yes
+  tasks:
+    - name: Wir erstellen ein neues Verzeichnis
+      file:
+        path: /home/my_dir_ansible
+        state: directory
+        mode: '0755'
