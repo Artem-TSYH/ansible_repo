@@ -1,0 +1,10 @@
+- name: New User
+  hosts: my_vm
+  become: yes
+  tasks:
+    - name: Wir erstellen einen neuen Benutzer
+      user:
+        name: user_ansible
+        shell: /bin/bash
+        home: /home/user_ansible
+        password: "{{'ansible' | password_hash('sha512') }}"
