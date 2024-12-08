@@ -1,12 +1,14 @@
 - name: Installation Git
-  hosts: my_vm
-  become: yes
+  hosts: vm_tests
+  become: true
   tasks:
     - name: Überprüfung. Neue Packete
-      apt:
-        update_cache: yes
+#     ansible.builtin.apt:
+      ansible.builtin.dnf:
+        update_cache: true
 
     - name: Wir installieren Git
-      apt:
+#     ansible.builtin.apt:
+      ansible.builtin.dnf:
         name: git
         state: present
