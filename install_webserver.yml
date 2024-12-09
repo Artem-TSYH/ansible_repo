@@ -1,0 +1,32 @@
+---
+- name: Installation Webserver
+  hosts: vm_tests
+  become: true
+
+  tasks:
+    - name: Überprüfung. Neue Packete
+      ansible.builtin.package:
+        update_cache: true
+
+    - name: Wir installieren Webserver
+      ansible.builtin.package:
+        name: httpd
+        state: present
+
+    - name: Webserver. Run
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
+
+    - name: Configure Firewall
+      ansible.posix.firewalld:
+        port: 80/tcp
+        permanent: true
+        state: enabled
+
+    - name: Reload Firewall
+      ansible.builtin.command:
+        cmd: firewall-cmd --reload
+      register: firewall_cmd_result
+      changed_when: firewall_cmd_result.rc == 0
