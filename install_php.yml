@@ -1,0 +1,15 @@
+- name: Installation PHP
+  hosts: vm_tests
+  become: true
+  tasks:
+    - name: Überprüfung. Neue Packete
+      ansible.builtin.package:
+        update_cache: true
+
+    - name: Wir installieren PHP
+      ansible.builtin.package:
+        name: 
+          - php
+          - php-cli
+          - php-mysqlnd
+        state: present
