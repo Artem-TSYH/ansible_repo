@@ -1,12 +1,10 @@
 ---
 - name: Meine erste Schritte mit Ansible
   hosts: vm_tests
-# Korrigiert bei ansible-lint. Kein "yes"!
   become: true
   tasks:
     - name: Wir erstellen ein neues Verzeichnis
-# Wichtig! Nicht einfach "file" zu schreiben!
       ansible.builtin.file:
-        path: /home/my_dir_ansible
+        path: /home/usecase_2025_01_10
         state: directory
         mode: '0755'

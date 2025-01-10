@@ -1,3 +1,4 @@
+---
 - name: Installation PHP
   hosts: vm_tests
   become: true

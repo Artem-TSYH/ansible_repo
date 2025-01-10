@@ -1,0 +1,34 @@
+---
+- name: Install MySQL
+  hosts: vm_tests
+  become: yes
+  tasks:
+    - name: Install MySQL Server
+      ansible.builtin.package:
+        name: mysql-server
+        state: present
+
+    - name: Install pip3
+      ansible.builtin.package:
+        name: python3-pip
+        state: present
+
+    - name: Install PyMySQL
+      # Wichtig
+      ansible.builtin.pip:
+        name: PyMySQL
+        state: present
+
+    - name: Start MySQL Server
+      systemd:
+        name: mysqld
+        state: started
+        enabled: yes
+
+    - name: Set MySQL root passwort
+      mysql_user:
+        name: root
+        host: localhost
+        password: ansible
+        state: present
+      

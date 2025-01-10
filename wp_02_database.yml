@@ -1,0 +1,19 @@
+---
+- name: WordPress. Database
+  hosts: vm_tests
+  become: true
+  tasks:
+    - name: WordPress bentötigt MySQL Database
+      community.mysql.mysql_db:
+        name: wp_ansible
+        state: present
+        login_user: root
+        login_password: 'ansible'
+    - name: Database benötigt User
+      community.mysql.mysql_user:
+        name: ansible-user
+        password: 'ansible'
+        priv: 'wp_ansible.*:ALL'
+        state: present
+        login_user: root
+        login_password: 'ansible'

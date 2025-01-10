@@ -1,0 +1,19 @@
+---
+- name: WordPress. Download
+  hosts: vm_tests
+  become: true
+  tasks:
+    - name: Download WordPress URL
+      ansible.builtin.get_url:
+        url: https://wordpress.org/latest.tar.gz
+        dest: /tmp/latest.tar.gz
+
+    - name: WordPress. UnPack
+      ansible.builtin.unarchive:
+        src: /tmp/latest.tar.gz 
+        dest: /tmp
+        remote_src: yes
+
+    - name: Copy to /var/html
+      ansible.builtin.shell:
+        mv /tmp/wordpress/* /var/www/html
